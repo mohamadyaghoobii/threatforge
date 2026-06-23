@@ -1,0 +1,23 @@
+id: splunk_azure_activity
+target: splunk
+name: Splunk Azure Activity
+audience: Cloud Security
+description: Azure Activity / AAD sign-in logs via Splunk Add-on for Microsoft Cloud Services.
+base:
+  index: azure
+  sourcetype: "mscs:azure:audit"
+field_mapping_pack: null
+output_formats: [spl, savedsearches_conf, risk_based_alert]
+output_defaults:
+  spl:
+    leading_filter: "index=azure (sourcetype=mscs:azure:audit OR sourcetype=azure:aad:signin)"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [user], period: "1h"}
+    notable: {enabled: true, security_domain: access}
+    rba: {enabled: true, risk_object_field: user, risk_object_type: user, threat_object_field: src_ip, threat_object_type: system, base_score: 50}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {user: user, host: src_ip}
+mitre_metadata_strategy: ess_correlation_annotation

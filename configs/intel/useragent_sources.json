@@ -1,0 +1,77 @@
+{
+  "timeout_seconds": 20,
+  "sources": [
+    {
+      "id": "mitchell_nginx_bad_ua",
+      "name": "mitchellkrogza nginx-ultimate-bad-bot-blocker bad-user-agents.list",
+      "format": "txt_lines",
+      "url": "https://raw.githubusercontent.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/master/_generator_lists/bad-user-agents.list",
+      "default_category": "Bad Bot",
+      "default_severity": "medium"
+    },
+    {
+      "id": "mitchell_apache_bad_ua",
+      "name": "mitchellkrogza apache-ultimate-bad-bot-blocker bad-user-agents.list",
+      "format": "txt_lines",
+      "url": "https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/master/_generator_lists/bad-user-agents.list",
+      "default_category": "Bad Bot",
+      "default_severity": "medium"
+    },
+    {
+      "id": "digininja_scanner_uas",
+      "name": "digininja scanner_user_agents list.json",
+      "format": "json_list",
+      "url": "https://raw.githubusercontent.com/digininja/scanner_user_agents/master/list.json",
+      "default_category": "Security Scanner",
+      "default_severity": "high"
+    },
+    {
+      "id": "owasp_crs_scanner_uas",
+      "name": "OWASP CRS scanners-user-agents.data",
+      "format": "txt_lines",
+      "url": "https://raw.githubusercontent.com/coreruleset/coreruleset/main/rules/scanners-user-agents.data",
+      "default_category": "Security Scanner",
+      "default_severity": "high"
+    },
+    {
+      "id": "mthcht_suspicious_uas",
+      "name": "mthcht awesome-lists suspicious_http_user_agents_list.csv",
+      "format": "csv_first_column",
+      "url": "https://raw.githubusercontent.com/mthcht/awesome-lists/main/Lists/suspicious_http_user_agents_list.csv",
+      "default_category": "Suspicious",
+      "default_severity": "medium"
+    },
+    {
+      "id": "jumasheff_nginx_useragents",
+      "name": "jumasheff nginx-useragents-blacklist useragents.txt",
+      "format": "txt_lines",
+      "url": "https://raw.githubusercontent.com/jumasheff/nginx-useragents-blacklist/master/useragents.txt",
+      "default_category": "Bad Bot",
+      "default_severity": "medium"
+    },
+    {
+      "id": "edvancemedia_bad_ua",
+      "name": "edvancemedia blacklist bad-user-agents.list.txt",
+      "format": "txt_lines",
+      "url": "https://raw.githubusercontent.com/edvancemedia/blacklist/main/bad-user-agents.list.txt",
+      "default_category": "Bad Bot",
+      "default_severity": "medium"
+    },
+    {
+  "id": "cronup_llm_agents",
+  "name": "CronUp LLM agents intel (JSON)",
+  "url": "https://raw.githubusercontent.com/CronUp/llm-agents-intel/main/user-agents_llm.json",
+  "format": "json_list",
+  "default_category": "LLM",
+  "default_severity": "medium"
+},
+{
+  "id": "ai_robots_txt",
+  "name": "ai-robots-txt robots.txt (User-agent lines)",
+  "url": "https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/main/robots.txt",
+  "format": "robots_user_agents",
+  "default_category": "LLM",
+  "default_severity": "medium"
+}
+  ]
+}

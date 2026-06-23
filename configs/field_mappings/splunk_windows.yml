@@ -1,0 +1,27 @@
+mappings:
+  EventID:
+    - EventCode
+    - EventID
+  Image:
+    - Image
+    - process_path
+    - Processes.process_path
+  CommandLine:
+    - CommandLine
+    - process_command_line
+    - Processes.process
+  ParentImage:
+    - ParentImage
+    - parent_process_path
+  ParentCommandLine:
+    - ParentCommandLine
+    - parent_process_command_line
+  User:
+    - User
+    - user
+  TargetUserName:
+    - TargetUserName
+    - user
+  ComputerName:
+    - ComputerName
+    - host

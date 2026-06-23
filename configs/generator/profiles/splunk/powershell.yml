@@ -1,0 +1,22 @@
+id: splunk_powershell
+target: splunk
+name: Splunk PowerShell
+audience: SOC / Endpoint
+description: Windows PowerShell Script Block Logging (EventCode 4104) and module logging.
+base:
+  index: wineventlog
+  sourcetype: WinEventLog:Microsoft-Windows-PowerShell/Operational
+field_mapping_pack: splunk_windows_security_fields
+output_formats: [spl, savedsearches_conf, risk_based_alert, dashboard_panel]
+output_defaults:
+  spl:
+    leading_filter: "index=wineventlog sourcetype=WinEventLog:Microsoft-Windows-PowerShell/Operational"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [host, user], period: "1h"}
+    notable: {enabled: true, security_domain: endpoint}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {host: ComputerName, user: User}
+mitre_metadata_strategy: ess_correlation_annotation

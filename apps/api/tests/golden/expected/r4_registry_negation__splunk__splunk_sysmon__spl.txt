@@ -1,0 +1,1 @@
+index=sysmon sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational (TargetObject="*\\CurrentVersion\\Run*" NOT (Image="*\\trusted_updater.exe"))

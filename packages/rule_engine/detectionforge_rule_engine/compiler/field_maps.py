@@ -1,0 +1,151 @@
+"""Default Sigma-field -> SIEM-field maps per target.
+
+These are baseline maps used when no profile-specific field-mapping pack
+is supplied. Profiles (configs/generator/field_mappings/*.yml) can extend
+or override these in the API layer; the engine package keeps a sane
+default so it works standalone.
+"""
+
+from __future__ import annotations
+
+FIELD_MAPPINGS: dict[str, dict[str, str]] = {
+    "splunk": {
+        "EventID": "EventCode",
+        "event_id": "EventCode",
+        "Image": "Image",
+        "OriginalFileName": "OriginalFileName",
+        "CommandLine": "CommandLine",
+        "ParentImage": "ParentImage",
+        "ParentCommandLine": "ParentCommandLine",
+        "User": "User",
+        "TargetUserName": "TargetUserName",
+        "ComputerName": "host",
+        "UtcTime": "_time",
+        "TargetFilename": "TargetFilename",
+        "DestinationIp": "DestinationIp",
+        "DestinationPort": "DestinationPort",
+        "SourceIp": "SourceIp",
+        "Hashes": "Hashes",
+    },
+    "sentinel": {
+        "EventID": "EventID",
+        "event_id": "EventID",
+        "Image": "FolderPath",
+        "CommandLine": "ProcessCommandLine",
+        "ParentImage": "InitiatingProcessFolderPath",
+        "ParentCommandLine": "InitiatingProcessCommandLine",
+        "User": "AccountName",
+        "TargetUserName": "TargetAccount",
+        "ComputerName": "DeviceName",
+        "TargetFilename": "FolderPath",
+        "DestinationIp": "RemoteIP",
+        "DestinationPort": "RemotePort",
+        "SourceIp": "LocalIP",
+    },
+    "elastic": {
+        "EventID": "event.code",
+        "event_id": "event.code",
+        "Image": "process.executable",
+        "OriginalFileName": "process.pe.original_file_name",
+        "CommandLine": "process.command_line",
+        "ParentImage": "process.parent.executable",
+        "ParentCommandLine": "process.parent.command_line",
+        "User": "user.name",
+        "TargetUserName": "user.target.name",
+        "ComputerName": "host.name",
+        "TargetFilename": "file.path",
+        "DestinationIp": "destination.ip",
+        "DestinationPort": "destination.port",
+        "SourceIp": "source.ip",
+    },
+    "opensearch": {
+        "EventID": "event.code",
+        "event_id": "event.code",
+        "Image": "process.executable",
+        "CommandLine": "process.command_line",
+        "ParentImage": "process.parent.executable",
+        "ParentCommandLine": "process.parent.command_line",
+        "User": "user.name",
+        "TargetUserName": "user.target.name",
+        "ComputerName": "host.name",
+    },
+    "qradar": {
+        "EventID": "qid",
+        "event_id": "qid",
+        "Image": "Process Path",
+        "CommandLine": "Command",
+        "ParentImage": "Parent Process Path",
+        "ParentCommandLine": "Parent Command",
+        "User": "Username",
+        "TargetUserName": "Username",
+        "ComputerName": "Hostname",
+    },
+    "chronicle": {
+        "EventID": "metadata.product_event_type",
+        "event_id": "metadata.product_event_type",
+        "Image": "target.process.file.full_path",
+        "CommandLine": "target.process.command_line",
+        "ParentImage": "principal.process.file.full_path",
+        "ParentCommandLine": "principal.process.command_line",
+        "User": "principal.user.userid",
+        "TargetUserName": "target.user.userid",
+        "ComputerName": "principal.hostname",
+    },
+    "logscale": {
+        "EventID": "EventID",
+        "event_id": "EventID",
+        "Image": "Image",
+        "CommandLine": "CommandLine",
+        "ParentImage": "ParentImage",
+        "ParentCommandLine": "ParentCommandLine",
+        "User": "User",
+        "TargetUserName": "TargetUserName",
+        "ComputerName": "ComputerName",
+    },
+}
+
+
+# Base selectors keyed by logsource category/service per target.
+BASES: dict[str, dict[str, str]] = {
+    "splunk": {
+        "sysmon": "index=sysmon",
+        "process_creation": "index=sysmon EventCode=1",
+        "network_connection": "index=sysmon EventCode=3",
+        "image_load": "index=sysmon EventCode=7",
+        "file_event": "index=sysmon EventCode=11",
+        "registry_event": "index=sysmon EventCode=12",
+        "dns_query": "index=sysmon EventCode=22",
+        "security": "index=wineventlog source=WinEventLog:Security",
+        "powershell": "index=wineventlog source=WinEventLog:*PowerShell*",
+        "default": "index=main",
+    },
+    "sentinel": {
+        "process_creation": "DeviceProcessEvents",
+        "network_connection": "DeviceNetworkEvents",
+        "file_event": "DeviceFileEvents",
+        "registry_event": "DeviceRegistryEvents",
+        "image_load": "DeviceImageLoadEvents",
+        "security": "SecurityEvent",
+        "powershell": 'DeviceEvents | where ActionType == "PowerShellCommand"',
+        "default": "SecurityEvent",
+    },
+    "elastic": {
+        "process_creation": 'event.category:"process"',
+        "network_connection": 'event.category:"network"',
+        "file_event": 'event.category:"file"',
+        "registry_event": 'event.category:"registry"',
+        "security": 'event.module:"windows"',
+        "default": "*",
+    },
+    "opensearch": {
+        "process_creation": 'event.category:"process"',
+        "default": "*",
+    },
+    "qradar": {"default": "SELECT * FROM events WHERE"},
+    "chronicle": {"default": 'metadata.event_type != ""'},
+    "logscale": {
+        "process_creation": "#repo=sysmon",
+        "security": "#repo=wineventlog",
+        "default": "*",
+    },
+}

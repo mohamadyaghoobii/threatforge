@@ -1,0 +1,22 @@
+id: splunk_cim_network
+target: splunk
+name: Splunk CIM Network
+audience: SOC / NetOps
+description: CIM-normalized network traffic (Network_Traffic.All_Traffic).
+base:
+  index: "*"
+  default_filter: "tag=network tag=communicate"
+field_mapping_pack: splunk_cim_endpoint
+output_formats: [spl, savedsearches_conf, datamodel_tstats]
+output_defaults:
+  spl:
+    leading_filter: "index=* tag=network tag=communicate"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [src, dest], period: "1h"}
+    notable: {enabled: true, security_domain: network}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {host: dest, user: user}
+mitre_metadata_strategy: ess_correlation_annotation

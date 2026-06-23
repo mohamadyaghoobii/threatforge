@@ -1,0 +1,1 @@
+index=wineventlog sourcetype=WinEventLog:Security EventCode="4625" | stats count(*) as count by TargetUserName | where count > 10

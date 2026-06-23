@@ -1,0 +1,1 @@
+SELECT * FROM events WHERE ("DestinationPort" > 1024 AND "Initiated" = "true")

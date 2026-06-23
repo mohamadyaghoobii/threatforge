@@ -1,0 +1,26 @@
+title: Linux Reverse Shell Command Indicators
+id: df-local-0005
+status: test
+description: Detects command-line fragments frequently used to establish Linux reverse shells.
+references:
+  - https://attack.mitre.org/techniques/T1059/004/
+author: MetaSec Security Center
+date: 2026/06/09
+tags:
+  - attack.execution
+  - attack.t1059.004
+logsource:
+  product: linux
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains:
+      - /dev/tcp/
+      - bash -i
+      - nc -e
+      - mkfifo
+      - python -c
+  condition: selection
+falsepositives:
+  - Penetration testing and training labs
+level: high

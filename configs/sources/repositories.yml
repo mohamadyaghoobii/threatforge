@@ -1,0 +1,56 @@
+repositories:
+  - name: sigmahq_sigma
+    url: https://github.com/SigmaHQ/sigma.git
+    branch: master
+    type: sigma
+    license: custom
+    enabled: true
+  - name: mdecrevoisier_sigma_detection_rules
+    url: https://github.com/mdecrevoisier/SIGMA-detection-rules.git
+    branch: main
+    type: sigma
+    license: CC0-1.0
+    enabled: true
+  - name: p4t12ick_sigma_rule_repository
+    url: https://github.com/P4T12ICK/Sigma-Rule-Repository.git
+    branch: master
+    type: sigma
+    license: GPL-3.0
+    enabled: true
+  - name: yamato_security_hayabusa_rules
+    url: https://github.com/Yamato-Security/hayabusa-rules.git
+    branch: main
+    type: hayabusa
+    license: DRL-1.1
+    enabled: true
+  - name: joesecurity_sigma_rules
+    url: https://github.com/joesecurity/sigma-rules.git
+    branch: master
+    type: sigma
+    license: custom
+    enabled: true
+  - name: mbabinski_sigma_rules
+    url: https://github.com/mbabinski/Sigma-Rules.git
+    branch: main
+    type: sigma
+    license: custom
+    enabled: true
+  - name: tsale_sigma_rules
+    url: https://github.com/tsale/Sigma_rules.git
+    branch: main
+    type: sigma
+    license: custom
+    enabled: true
+  - name: delivrto_detections
+    url: https://github.com/delivr-to/detections.git
+    branch: main
+    type: sigma
+    license: custom
+    enabled: true
+  - name: local_custom_detection_pack
+    url: local://data/custom-rules
+    branch: local
+    type: local_sigma
+    license: internal
+    enabled: true
+    local_path: data/custom-rules

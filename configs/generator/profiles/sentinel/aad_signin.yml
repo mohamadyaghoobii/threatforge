@@ -1,0 +1,13 @@
+id: sentinel_aad_signin
+target: sentinel
+name: Sentinel — Entra ID Sign-in
+audience: Identity / SOC
+description: Microsoft Entra ID (Azure AD) interactive sign-in logs (SigninLogs).
+base:
+  table: SigninLogs
+output_formats: [kql, analytic_rule_arm, hunting_query_yaml, workbook_panel]
+output_defaults:
+  analytic_rule_arm: {query_frequency: PT10M, query_period: PT10M, suppression_enabled: true, suppression_duration: PT1H}
+severity_map: {critical: High, high: High, medium: Medium, low: Low, informational: Informational}
+entity_inference: {user: UserPrincipalName, ip: IPAddress}
+mitre_metadata_strategy: sentinel_arm

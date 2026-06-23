@@ -1,0 +1,22 @@
+id: splunk_linux_syslog
+target: splunk
+name: Splunk Linux Syslog
+audience: SOC / Linux
+description: Linux auditd / syslog telemetry shipped to index=linux.
+base:
+  index: linux
+  sourcetype: linux:audit
+field_mapping_pack: null
+output_formats: [spl, savedsearches_conf]
+output_defaults:
+  spl:
+    leading_filter: "index=linux (sourcetype=linux:audit OR sourcetype=syslog)"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [host], period: "1h"}
+    notable: {enabled: true, security_domain: endpoint}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {host: host, user: user}
+mitre_metadata_strategy: ess_correlation_annotation

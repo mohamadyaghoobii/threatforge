@@ -1,0 +1,13 @@
+id: sentinel_office_activity
+target: sentinel
+name: Sentinel — Office Activity
+audience: Identity / Email Security
+description: Microsoft 365 unified audit (OfficeActivity table).
+base:
+  table: OfficeActivity
+output_formats: [kql, analytic_rule_arm, hunting_query_yaml, workbook_panel]
+output_defaults:
+  analytic_rule_arm: {query_frequency: PT15M, query_period: PT15M, suppression_enabled: true, suppression_duration: PT1H}
+severity_map: {critical: High, high: High, medium: Medium, low: Low, informational: Informational}
+entity_inference: {user: UserId, ip: ClientIP}
+mitre_metadata_strategy: sentinel_arm

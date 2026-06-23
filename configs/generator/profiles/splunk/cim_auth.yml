@@ -1,0 +1,23 @@
+id: splunk_cim_auth
+target: splunk
+name: Splunk CIM Authentication
+audience: SOC / Identity
+description: CIM-normalized authentication (Authentication.Authentication).
+base:
+  index: "*"
+  default_filter: "tag=authentication"
+field_mapping_pack: splunk_windows_security_fields
+output_formats: [spl, savedsearches_conf, datamodel_tstats, risk_based_alert]
+output_defaults:
+  spl:
+    leading_filter: "index=* tag=authentication"
+  savedsearches_conf:
+    cron_schedule: "*/10 * * * *"
+    earliest_time: "-10m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [user, src], period: "1h"}
+    notable: {enabled: true, security_domain: access}
+    rba: {enabled: true, risk_object_field: user, risk_object_type: user, threat_object_field: src, threat_object_type: system, base_score: 40}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {host: dest, user: user}
+mitre_metadata_strategy: ess_correlation_annotation

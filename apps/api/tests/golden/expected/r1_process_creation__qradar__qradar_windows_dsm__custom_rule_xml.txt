@@ -1,0 +1,15 @@
+<rule>
+  <name>MetaSec Security Center - LOLBin Process Creation</name>
+  <severity>7</severity>
+  <category>Anomaly</category>
+  <enabled>true</enabled>
+  <tests>
+    <test type="AQL" op="matches">SELECT * FROM events WHERE (("Process Path" ILIKE "%\\regsvr32.exe" OR "Process Path" ILIKE "%\\rundll32.exe" OR "Process Path" ILIKE "%\\mshta.exe") AND ("Command" ILIKE "%scrobj.dll%" OR "Command" ILIKE "%http%"))</test>
+  </tests>
+  <actions>
+    <action type="dispatch_offense">
+      <field name="offense_indexer">Username</field>
+      <field name="annotate">T1218</field>
+    </action>
+  </actions>
+</rule>

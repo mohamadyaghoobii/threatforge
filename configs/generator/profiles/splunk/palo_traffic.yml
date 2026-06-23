@@ -1,0 +1,22 @@
+id: splunk_palo_traffic
+target: splunk
+name: Splunk Palo Alto Traffic
+audience: NetOps / SOC
+description: Palo Alto NGFW traffic/threat logs via Palo Alto Networks Add-on.
+base:
+  index: pan
+  sourcetype: "pan:traffic"
+field_mapping_pack: null
+output_formats: [spl, savedsearches_conf]
+output_defaults:
+  spl:
+    leading_filter: "index=pan (sourcetype=pan:traffic OR sourcetype=pan:threat)"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [src_ip, dest_ip], period: "1h"}
+    notable: {enabled: true, security_domain: network}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {host: dest_ip, user: user}
+mitre_metadata_strategy: ess_correlation_annotation

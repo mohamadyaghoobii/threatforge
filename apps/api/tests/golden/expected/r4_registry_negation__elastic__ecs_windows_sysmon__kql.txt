@@ -1,0 +1,1 @@
+event.category:"registry" and (TargetObject : "*\\CurrentVersion\\Run*" and not (process.executable : "*\\trusted_updater.exe"))

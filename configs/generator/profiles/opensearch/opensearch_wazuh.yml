@@ -1,0 +1,9 @@
+id: opensearch_wazuh
+target: opensearch
+name: OpenSearch — Wazuh
+audience: SOC
+description: Wazuh alerts indexed in the Wazuh indexer (OpenSearch).
+output_formats: [kql, dsl, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {host: agent.name, user: data.srcuser}
+mitre_metadata_strategy: opensearch_monitor

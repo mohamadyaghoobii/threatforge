@@ -1,0 +1,1 @@
+SecurityEvent | where EventID == 4625 | summarize Count = count() by TargetUserName | where Count > 10

@@ -1,0 +1,1 @@
+index=sysmon sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational ((Image="*\\regsvr32.exe" OR Image="*\\rundll32.exe" OR Image="*\\mshta.exe") (CommandLine="*scrobj.dll*" OR CommandLine="*http*"))

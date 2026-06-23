@@ -1,0 +1,9 @@
+id: wazuh_default
+target: wazuh
+name: Wazuh — Default
+audience: SOC
+description: Generic Wazuh ruleset target.
+output_formats: [rule_xml, detection_rule_ndjson]
+severity_map: {critical: 15, high: 12, medium: 8, low: 5, informational: 3}
+entity_inference: {host: agent.name, user: data.srcuser}
+mitre_metadata_strategy: wazuh_rule

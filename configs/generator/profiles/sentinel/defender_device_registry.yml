@@ -1,0 +1,13 @@
+id: sentinel_defender_device_registry
+target: sentinel
+name: Defender XDR — Device Registry
+audience: SOC / Endpoint
+description: Microsoft Defender XDR DeviceRegistryEvents.
+base:
+  table: DeviceRegistryEvents
+output_formats: [kql, analytic_rule_arm, hunting_query_yaml, workbook_panel]
+output_defaults:
+  analytic_rule_arm: {query_frequency: PT15M, query_period: PT15M, suppression_enabled: true, suppression_duration: PT1H}
+severity_map: {critical: High, high: High, medium: Medium, low: Low, informational: Informational}
+entity_inference: {host: DeviceName, user: InitiatingProcessAccountName}
+mitre_metadata_strategy: sentinel_arm

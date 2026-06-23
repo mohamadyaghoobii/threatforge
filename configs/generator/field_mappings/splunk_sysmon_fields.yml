@@ -1,0 +1,32 @@
+id: splunk_sysmon_fields
+target: splunk
+description: Sysmon (XmlWinEventLog) field names as Splunk extracts them.
+mappings:
+  EventID: EventCode
+  event_id: EventCode
+  Image: Image
+  OriginalFileName: OriginalFileName
+  CommandLine: CommandLine
+  ParentImage: ParentImage
+  ParentCommandLine: ParentCommandLine
+  User: User
+  TargetUserName: TargetUserName
+  ComputerName: host
+  UtcTime: _time
+  ProcessGuid: ProcessGuid
+  ProcessId: ProcessId
+  IntegrityLevel: IntegrityLevel
+  Hashes: Hashes
+  TargetFilename: TargetFilename
+  DestinationIp: DestinationIp
+  DestinationPort: DestinationPort
+  DestinationHostname: DestinationHostname
+  SourceIp: SourceIp
+  SourcePort: SourcePort
+  Protocol: Protocol
+  ImageLoaded: ImageLoaded
+  Signed: Signed
+  Signature: Signature
+  TargetObject: TargetObject
+  Details: Details
+unknown_field_policy: pass_through_with_warning

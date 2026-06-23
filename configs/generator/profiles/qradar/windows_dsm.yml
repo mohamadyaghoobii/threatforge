@@ -1,0 +1,9 @@
+id: qradar_windows_dsm
+target: qradar
+name: QRadar — Windows DSM
+audience: SOC
+description: Microsoft Windows Security Event Log DSM in QRadar.
+output_formats: [aql, custom_rule_xml, building_block_xml, ariel_search_json]
+severity_map: {critical: 9, high: 7, medium: 5, low: 3, informational: 1}
+entity_inference: {host: Hostname, user: Username}
+mitre_metadata_strategy: qradar_rule

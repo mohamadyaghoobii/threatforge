@@ -1,0 +1,9 @@
+id: ecs_endpoint_security
+target: elastic
+name: Elastic ECS — Endpoint Security
+audience: SOC / Endpoint
+description: Elastic Defend (Endpoint Security) events normalized to ECS.
+output_formats: [kql, lucene, eql, esql, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {host: host.name, user: user.name, process: process.command_line}
+mitre_metadata_strategy: elastic_detection_rule

@@ -1,0 +1,9 @@
+id: cse_cloud_aws
+target: sumologic
+name: Sumo Logic CSE — AWS
+audience: Cloud Security
+description: AWS CloudTrail records in Sumo Logic Cloud SIEM Enterprise.
+output_formats: [query, cse_rule_yaml]
+severity_map: {critical: 8, high: 6, medium: 4, low: 2, informational: 1}
+entity_inference: {user: user_username, host: srcDevice_ip}
+mitre_metadata_strategy: sumo_cse

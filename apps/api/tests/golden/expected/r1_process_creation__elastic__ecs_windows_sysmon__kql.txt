@@ -1,0 +1,1 @@
+event.category:"process" and ((process.executable : "*\\regsvr32.exe" or process.executable : "*\\rundll32.exe" or process.executable : "*\\mshta.exe") and (process.command_line : "*scrobj.dll*" or process.command_line : "*http*"))

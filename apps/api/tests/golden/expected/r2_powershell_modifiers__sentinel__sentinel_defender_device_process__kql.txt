@@ -1,0 +1,1 @@
+DeviceProcessEvents | where ((ProcessCommandLine contains "-encodedcommand" or ProcessCommandLine contains "/encodedcommand" or ProcessCommandLine contains "–encodedcommand" or ProcessCommandLine contains "—encodedcommand") and FolderPath endswith "\\powershell.exe")

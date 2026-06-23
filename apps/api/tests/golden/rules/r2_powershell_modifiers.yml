@@ -1,0 +1,17 @@
+title: PowerShell Encoded and Obfuscated
+id: golden-0002
+status: test
+description: Detects encoded/obfuscated PowerShell via multiple modifiers.
+tags:
+  - attack.execution
+  - attack.t1059.001
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|windash|contains:
+      - -encodedcommand
+    Image|endswith: \powershell.exe
+  condition: selection
+level: high

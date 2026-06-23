@@ -1,0 +1,47 @@
+[project]
+name = "detectionforge-api"
+version = "0.1.0"
+description = "FastAPI backend for DetectionForge"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.111.0",
+  "uvicorn[standard]>=0.30.0",
+  "pydantic>=2.7.0",
+  "pydantic-settings>=2.2.1",
+  "SQLAlchemy>=2.0.30",
+  "psycopg[binary]>=3.1.18",
+  "PyYAML>=6.0.1",
+  "python-multipart>=0.0.9",
+  "requests>=2.31.0",
+  "beautifulsoup4>=4.12.0",
+  "detectionforge-rule-engine"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+  "httpx>=0.27.0",
+  "ruff>=0.4.4",
+  "mypy>=1.10.0"
+]
+# In-process pySigma backends (G3). Each is optional; the generator
+# degrades to the built-in AST compiler when a backend is missing.
+pysigma = [
+  "pysigma>=0.11",
+  "pysigma-backend-splunk>=1.1",
+  "pysigma-backend-elasticsearch>=1.0",
+  "pysigma-backend-kusto>=1.0",
+  "pysigma-backend-opensearch>=2.0"
+]
+# Browser-rendered recon (screenshots). Optional — recon degrades to
+# HTTP-only when Selenium or a browser isn't present.
+recon = [
+  "selenium>=4.20"
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = [".", "../../packages/rule_engine"]

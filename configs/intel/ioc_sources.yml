@@ -1,0 +1,55 @@
+# IOC feed sources for the Threat Intelligence module.
+# Only feeds that reliably return data are enabled — no auth required, all
+# public OSINT. Adding a feed is a config change, not a code change; each
+# `format` selects a parser in app/services/intel/collectors/feeds.py.
+timeout_seconds: 45
+sources:
+  - id: urlhaus
+    name: URLhaus — recent malicious URLs
+    enabled: true
+    weight: 90
+    format: urlhaus_csv
+    url: https://urlhaus.abuse.ch/downloads/csv_recent/
+    category: malware
+    confidence: high
+    limit: 2500
+
+  - id: threatfox
+    name: ThreatFox — recent IOCs (public CSV)
+    enabled: true
+    weight: 85
+    format: threatfox_csv
+    url: https://threatfox.abuse.ch/export/csv/recent/
+    category: malware
+    confidence: medium
+    limit: 4000
+
+  - id: feodotracker
+    name: Feodo Tracker — botnet C2 IPs (aggressive)
+    enabled: true
+    weight: 88
+    format: abuse_ip_csv
+    url: https://feodotracker.abuse.ch/downloads/ipblocklist_aggressive.csv
+    category: c2
+    confidence: high
+    limit: 4000
+
+  - id: malwarebazaar
+    name: MalwareBazaar — recent SHA256 hashes
+    enabled: true
+    weight: 85
+    format: hash_txt
+    url: https://bazaar.abuse.ch/export/txt/sha256/recent/
+    category: malware
+    confidence: high
+    limit: 1000
+
+  - id: blocklist_de
+    name: blocklist.de — attacking IPs
+    enabled: true
+    weight: 70
+    format: ip_txt
+    url: https://lists.blocklist.de/lists/all.txt
+    category: attacker
+    confidence: medium
+    limit: 6000

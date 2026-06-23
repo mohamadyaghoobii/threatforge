@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: detectionforge
+      POSTGRES_PASSWORD: detectionforge
+      POSTGRES_DB: detectionforge
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/api/Dockerfile
+    environment:
+      APP_NAME: MetaSec Security Center
+      APP_ENV: docker
+      DATABASE_URL: postgresql+psycopg://detectionforge:detectionforge@postgres:5432/detectionforge
+      DATA_DIR: /app/data
+      CONFIG_DIR: /app/configs
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      SIGMA_CLI_BIN: sigma
+    volumes:
+      - ./data:/app/data
+      - ./configs:/app/configs
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+
+  web:
+    build:
+      context: .
+      dockerfile: infra/web/Dockerfile
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:

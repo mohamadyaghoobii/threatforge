@@ -1,0 +1,9 @@
+id: opensearch_ecs
+target: opensearch
+name: OpenSearch — ECS
+audience: SOC
+description: ECS-normalized telemetry in OpenSearch (Data Prepper / Beats).
+output_formats: [kql, dsl, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {host: host.name, user: user.name}
+mitre_metadata_strategy: opensearch_monitor

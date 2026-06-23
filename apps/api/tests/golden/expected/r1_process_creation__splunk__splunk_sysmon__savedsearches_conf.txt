@@ -1,0 +1,28 @@
+[MetaSec Security Center - LOLBin Process Creation]
+description = Detects suspicious LOLBin execution.
+search = index=sysmon sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational ((Image="*\\regsvr32.exe" OR Image="*\\rundll32.exe" OR Image="*\\mshta.exe") (CommandLine="*scrobj.dll*" OR CommandLine="*http*"))
+disabled = 0
+is_scheduled = 1
+realtime_schedule = 0
+cron_schedule = */15 * * * *
+dispatch.earliest_time = -15m
+dispatch.latest_time = now
+alert.suppress = 1
+alert.suppress.fields = host,user
+alert.suppress.period = 1h
+action.notable = 1
+action.notable.param.rule_title = LOLBin Process Creation
+action.notable.param.rule_description = Detects suspicious LOLBin execution.
+action.notable.param.security_domain = endpoint
+action.notable.param.severity = high
+action.notable.param.drilldown_name = View raw events for $host$
+action.notable.param.drilldown_search = index=sysmon sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational ((Image="*\\regsvr32.exe" OR Image="*\\rundll32.exe" OR Image="*\\mshta.exe") (CommandLine="*scrobj.dll*" OR CommandLine="*http*")) host="$host$"
+action.risk = 1
+action.risk.param._risk_score = 40
+action.risk.param._risk_object = user
+action.risk.param._risk_object_type = user
+action.risk.param.threat_object_field = Image
+action.risk.param.threat_object_type = process
+action.correlationsearch.enabled = 1
+action.correlationsearch.label = MetaSec Security Center - LOLBin Process Creation
+action.correlationsearch.annotations = {"mitre_attack":["T1218"],"kill_chain_phases":["defense_evasion","execution"]}

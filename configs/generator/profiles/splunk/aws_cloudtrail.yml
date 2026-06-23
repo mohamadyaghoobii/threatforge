@@ -1,0 +1,23 @@
+id: splunk_aws_cloudtrail
+target: splunk
+name: Splunk AWS CloudTrail
+audience: Cloud Security
+description: AWS CloudTrail events via Splunk Add-on for AWS.
+base:
+  index: aws
+  sourcetype: aws:cloudtrail
+field_mapping_pack: null
+output_formats: [spl, savedsearches_conf, risk_based_alert]
+output_defaults:
+  spl:
+    leading_filter: "index=aws sourcetype=aws:cloudtrail"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [user, src], period: "1h"}
+    notable: {enabled: true, security_domain: network}
+    rba: {enabled: true, risk_object_field: user, risk_object_type: user, threat_object_field: src, threat_object_type: system, base_score: 50}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {user: userIdentity.arn, host: sourceIPAddress}
+mitre_metadata_strategy: ess_correlation_annotation

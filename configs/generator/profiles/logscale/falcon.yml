@@ -1,0 +1,9 @@
+id: logscale_falcon
+target: logscale
+name: LogScale — Falcon Insight
+audience: SOC / Endpoint
+description: CrowdStrike Falcon telemetry in LogScale.
+output_formats: [query, alert_yaml, dashboard_widget]
+severity_map: {critical: CRITICAL, high: HIGH, medium: MEDIUM, low: LOW, informational: INFO}
+entity_inference: {host: aid, user: UserName}
+mitre_metadata_strategy: logscale_alert

@@ -1,0 +1,40 @@
+id: splunk_windows_security
+target: splunk
+name: Splunk Windows Security
+audience: SOC / Identity
+description: |
+  Native Windows Security event log shipped as WinEventLog:Security to a
+  Splunk index. Suitable for Sigma rules with logsource.product=windows
+  + service in {security, authentication, ntlm, kerberos}.
+base:
+  index: wineventlog
+  sourcetype: WinEventLog:Security
+field_mapping_pack: splunk_windows_security_fields
+output_formats:
+  - spl
+  - savedsearches_conf
+  - ess_notable
+output_defaults:
+  spl:
+    leading_filter: "index=wineventlog sourcetype=WinEventLog:Security"
+  savedsearches_conf:
+    cron_schedule: "*/15 * * * *"
+    earliest_time: "-15m"
+    latest_time: "now"
+    suppression:
+      enabled: true
+      fields: [host, user]
+      period: "1h"
+    notable:
+      enabled: true
+      security_domain: access
+severity_map:
+  critical: 5
+  high: 4
+  medium: 3
+  low: 2
+  informational: 1
+entity_inference:
+  host: ComputerName
+  user: TargetUserName
+mitre_metadata_strategy: ess_correlation_annotation

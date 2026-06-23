@@ -1,0 +1,9 @@
+id: ecs_cloud_aws
+target: elastic
+name: Elastic ECS — AWS CloudTrail
+audience: Cloud Security
+description: AWS CloudTrail via Elastic AWS integration normalized to ECS.
+output_formats: [kql, lucene, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {user: user.name, host: source.ip}
+mitre_metadata_strategy: elastic_detection_rule

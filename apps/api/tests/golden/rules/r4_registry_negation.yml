@@ -1,0 +1,17 @@
+title: Run Key Persistence Excluding Known Good
+id: golden-0004
+status: test
+description: Registry run-key writes excluding a known-good updater.
+tags:
+  - attack.persistence
+  - attack.t1547.001
+logsource:
+  product: windows
+  category: registry_event
+detection:
+  selection:
+    TargetObject|contains: \CurrentVersion\Run
+  filter:
+    Image|endswith: \trusted_updater.exe
+  condition: selection and not filter
+level: medium

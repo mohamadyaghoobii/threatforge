@@ -1,0 +1,16 @@
+id: splunk_cim_endpoint
+target: splunk
+description: Map Sigma process_creation fields to Splunk CIM Endpoint data model.
+mappings:
+  Image: process_path
+  OriginalFileName: original_file_name
+  CommandLine: process
+  ParentImage: parent_process_path
+  ParentCommandLine: parent_process
+  User: user
+  ComputerName: dest
+  ProcessId: process_id
+  ParentProcessId: parent_process_id
+  IntegrityLevel: process_integrity_level
+  Hashes: process_hash
+unknown_field_policy: pass_through_with_warning

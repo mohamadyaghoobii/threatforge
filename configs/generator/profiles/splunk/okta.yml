@@ -1,0 +1,23 @@
+id: splunk_okta
+target: splunk
+name: Splunk Okta
+audience: Identity / SOC
+description: Okta system log events via Splunk Add-on for Okta.
+base:
+  index: okta
+  sourcetype: OktaIM2:log
+field_mapping_pack: null
+output_formats: [spl, savedsearches_conf, risk_based_alert]
+output_defaults:
+  spl:
+    leading_filter: "index=okta sourcetype=OktaIM2:log"
+  savedsearches_conf:
+    cron_schedule: "*/10 * * * *"
+    earliest_time: "-10m"
+    latest_time: "now"
+    suppression: {enabled: true, fields: [user, src_ip], period: "1h"}
+    notable: {enabled: true, security_domain: access}
+    rba: {enabled: true, risk_object_field: user, risk_object_type: user, threat_object_field: src_ip, threat_object_type: system, base_score: 50}
+severity_map: {critical: 5, high: 4, medium: 3, low: 2, informational: 1}
+entity_inference: {user: user, host: src_ip}
+mitre_metadata_strategy: ess_correlation_annotation

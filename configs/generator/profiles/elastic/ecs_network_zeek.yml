@@ -1,0 +1,9 @@
+id: ecs_network_zeek
+target: elastic
+name: Elastic ECS — Zeek Network
+audience: NetOps / SOC
+description: Zeek network telemetry via Elastic Zeek integration normalized to ECS.
+output_formats: [kql, lucene, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {host: destination.ip, ip: source.ip}
+mitre_metadata_strategy: elastic_detection_rule

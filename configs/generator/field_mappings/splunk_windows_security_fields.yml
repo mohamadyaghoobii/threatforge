@@ -1,0 +1,16 @@
+id: splunk_windows_security_fields
+target: splunk
+description: Native Windows Security channel (WinEventLog:Security) fields.
+mappings:
+  EventID: EventCode
+  event_id: EventCode
+  TargetUserName: Target_Account_Name
+  SubjectUserName: Account_Name
+  TargetDomainName: Target_Domain
+  LogonType: Logon_Type
+  IpAddress: Source_Network_Address
+  WorkstationName: Workstation_Name
+  ComputerName: host
+  ProcessName: Process_Name
+  ServiceName: Service_Name
+unknown_field_policy: pass_through_with_warning

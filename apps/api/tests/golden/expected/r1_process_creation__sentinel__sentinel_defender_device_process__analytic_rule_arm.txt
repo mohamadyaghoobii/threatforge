@@ -1,0 +1,72 @@
+{
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "apiVersion": "2023-12-01-preview",
+  "kind": "Scheduled",
+  "name": "metasec-golden-0001",
+  "properties": {
+    "displayName": "MetaSec Security Center - LOLBin Process Creation",
+    "description": "Detects suspicious LOLBin execution.",
+    "severity": "High",
+    "enabled": true,
+    "query": "DeviceProcessEvents | where ((FolderPath endswith \"\\\\regsvr32.exe\" or FolderPath endswith \"\\\\rundll32.exe\" or FolderPath endswith \"\\\\mshta.exe\") and (ProcessCommandLine contains \"scrobj.dll\" or ProcessCommandLine contains \"http\"))",
+    "queryFrequency": "PT15M",
+    "queryPeriod": "PT15M",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "suppressionDuration": "PT1H",
+    "suppressionEnabled": false,
+    "tactics": [
+      "DefenseEvasion",
+      "Execution"
+    ],
+    "techniques": [
+      "T1218"
+    ],
+    "subTechniques": [],
+    "entityMappings": [
+      {
+        "entityType": "Host",
+        "fieldMappings": [
+          {
+            "identifier": "HostName",
+            "columnName": "DeviceName"
+          }
+        ]
+      },
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "Name",
+            "columnName": "AccountName"
+          }
+        ]
+      },
+      {
+        "entityType": "Process",
+        "fieldMappings": [
+          {
+            "identifier": "CommandLine",
+            "columnName": "ProcessCommandLine"
+          }
+        ]
+      }
+    ],
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": true,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5H",
+        "matchingMethod": "AllEntities"
+      }
+    },
+    "alertDetailsOverride": {
+      "alertDisplayNameFormat": "LOLBin Process Creation (MetaSec Security Center)",
+      "alertDescriptionFormat": "Detects suspicious LOLBin execution."
+    },
+    "customDetails": {
+      "Techniques": "T1218"
+    }
+  }
+}

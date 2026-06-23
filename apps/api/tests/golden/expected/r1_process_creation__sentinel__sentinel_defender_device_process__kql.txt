@@ -1,0 +1,1 @@
+DeviceProcessEvents | where ((FolderPath endswith "\\regsvr32.exe" or FolderPath endswith "\\rundll32.exe" or FolderPath endswith "\\mshta.exe") and (ProcessCommandLine contains "scrobj.dll" or ProcessCommandLine contains "http"))

@@ -1,0 +1,27 @@
+title: Suspicious PowerShell Script Block Obfuscation
+id: df-local-0003
+status: test
+description: Detects suspicious PowerShell script block fragments associated with obfuscation and encoded execution.
+references:
+  - https://attack.mitre.org/techniques/T1027/
+author: MetaSec Security Center
+date: 2026/06/09
+tags:
+  - attack.defense_evasion
+  - attack.t1027
+  - attack.t1059.001
+logsource:
+  product: windows
+  service: powershell
+detection:
+  selection:
+    ScriptBlockText|contains:
+      - FromBase64String
+      - IEX
+      - Invoke-Expression
+      - -join
+      - char[]
+  condition: selection
+falsepositives:
+  - Security testing and encoded administrative scripts
+level: medium

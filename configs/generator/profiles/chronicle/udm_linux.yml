@@ -1,0 +1,9 @@
+id: udm_linux
+target: chronicle
+name: Chronicle UDM — Linux
+audience: SOC
+description: Linux events normalized to Chronicle UDM.
+output_formats: [udm_search, yara_l_rule, retrohunt]
+severity_map: {critical: CRITICAL, high: HIGH, medium: MEDIUM, low: LOW, informational: INFO}
+entity_inference: {host: principal.hostname, user: principal.user.userid}
+mitre_metadata_strategy: chronicle_yaral

@@ -1,0 +1,13 @@
+rule golden_0001 {
+  meta:
+    author = "MetaSec Security Center"
+    description = "Detects suspicious LOLBin execution."
+    severity = "HIGH"
+    mitre_attack_tactic = "Defense Evasion"
+    mitre_attack_technique = "T1218"
+  events:
+    metadata.event_type != ""
+and ((target.process.file.full_path = /.*\regsvr32.exe/ nocase or target.process.file.full_path = /.*\rundll32.exe/ nocase or target.process.file.full_path = /.*\mshta.exe/ nocase) and (target.process.command_line = /.*scrobj.dll.*/ nocase or target.process.command_line = /.*http.*/ nocase))
+  condition:
+    $e
+}

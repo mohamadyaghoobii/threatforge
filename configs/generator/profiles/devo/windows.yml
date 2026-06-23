@@ -1,0 +1,9 @@
+id: devo_windows
+target: devo
+name: Devo — Windows
+audience: SOC
+description: Windows events in Devo (box.win tables).
+output_formats: [linq, alert_definition_json]
+severity_map: {critical: CRITICAL, high: HIGH, medium: MEDIUM, low: LOW, informational: INFO}
+entity_inference: {host: srcHost, user: userName}
+mitre_metadata_strategy: devo_alert

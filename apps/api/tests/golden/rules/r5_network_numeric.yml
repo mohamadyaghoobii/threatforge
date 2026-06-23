@@ -1,0 +1,16 @@
+title: Outbound To High Port
+id: golden-0005
+status: test
+description: Network connection to a high destination port.
+tags:
+  - attack.command_and_control
+  - attack.t1571
+logsource:
+  product: windows
+  category: network_connection
+detection:
+  selection:
+    DestinationPort|gt: 1024
+    Initiated: 'true'
+  condition: selection
+level: low

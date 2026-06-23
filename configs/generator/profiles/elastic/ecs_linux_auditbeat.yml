@@ -1,0 +1,9 @@
+id: ecs_linux_auditbeat
+target: elastic
+name: Elastic ECS — Linux Auditbeat
+audience: SOC / Linux
+description: Linux auditd via Auditbeat/Elastic Agent normalized to ECS.
+output_formats: [kql, lucene, eql, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {host: host.name, user: user.name, process: process.command_line}
+mitre_metadata_strategy: elastic_detection_rule

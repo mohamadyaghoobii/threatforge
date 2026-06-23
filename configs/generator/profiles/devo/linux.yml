@@ -1,0 +1,9 @@
+id: devo_linux
+target: devo
+name: Devo — Linux
+audience: SOC
+description: Linux events in Devo (box.unix tables).
+output_formats: [linq, alert_definition_json]
+severity_map: {critical: CRITICAL, high: HIGH, medium: MEDIUM, low: LOW, informational: INFO}
+entity_inference: {host: srcHost, user: userName}
+mitre_metadata_strategy: devo_alert

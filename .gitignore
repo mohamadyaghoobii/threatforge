@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.venv/
+venv/
+env/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# Env files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+!.env.example
+
+# Local databases (re-creatable by API on first run)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Synced external rule repos (rebuilt by /api/repositories/sync).
+# Keep data/custom-rules so internal detections are versioned.
+data/repos/
+data/cache/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+*.bak
+
+# Deploy staging artifact (derived from source; rebuilt by the deploy sync)
+.liara-deploy/
+
+# Local agent / editor tooling
+.claude/

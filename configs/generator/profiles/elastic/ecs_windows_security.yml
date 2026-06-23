@@ -1,0 +1,9 @@
+id: ecs_windows_security
+target: elastic
+name: Elastic ECS — Windows Security
+audience: SOC / Identity
+description: Windows Security channel normalized to ECS.
+output_formats: [kql, lucene, eql, detection_rule_ndjson]
+severity_map: {critical: critical, high: high, medium: medium, low: low, informational: low}
+entity_inference: {host: host.name, user: user.name}
+mitre_metadata_strategy: elastic_detection_rule

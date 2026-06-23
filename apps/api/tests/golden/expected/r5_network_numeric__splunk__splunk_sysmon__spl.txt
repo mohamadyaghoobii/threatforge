@@ -1,0 +1,1 @@
+index=sysmon sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational (DestinationPort>1024 Initiated="true")

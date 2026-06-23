@@ -1,0 +1,9 @@
+id: logscale_sysmon
+target: logscale
+name: LogScale — Sysmon
+audience: SOC / Endpoint
+description: Sysmon (ECS) telemetry in LogScale.
+output_formats: [query, alert_yaml, dashboard_widget]
+severity_map: {critical: CRITICAL, high: HIGH, medium: MEDIUM, low: LOW, informational: INFO}
+entity_inference: {host: ComputerName, user: User}
+mitre_metadata_strategy: logscale_alert

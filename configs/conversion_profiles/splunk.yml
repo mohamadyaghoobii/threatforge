@@ -1,0 +1,16 @@
+profiles:
+  - name: default_splunk_windows
+    target: splunk
+    description: Default Splunk profile for Windows and Sysmon rules
+    output_format: default
+    indexes:
+      windows:
+        - index=wineventlog
+      sysmon:
+        - index=sysmon
+    sourcetypes:
+      sysmon:
+        - XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+      security:
+        - WinEventLog:Security
+    default_index: index=main
